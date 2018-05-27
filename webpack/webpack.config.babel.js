@@ -4,10 +4,13 @@ export default {
     entry: {
         index: "./lib/index.js",
     },
+    target: "node",
     output: {
         path: path.resolve(__dirname, "../dist"),
+        libraryTarget: "commonjs2",
         filename: "[name].js",
     },
+    externals: /^(vue)/,
     module: {
         rules: [
             {
@@ -20,14 +23,5 @@ export default {
                 exclude: /node_modules/,
             },
         ],
-    },
-    optimization: {
-        splitChunks: {
-            name: 'vendors',
-            chunks: 'initial',
-        },
-        runtimeChunk: {
-            name: "manifest",
-        },
     },
 }

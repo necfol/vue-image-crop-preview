@@ -4,7 +4,7 @@
   "description": "vue component for image cropping and previewing",
   "main": "index.js",
   "scripts": {
-    "build:commonjs": "cross-env webpack --mode development --config ./webpack/webpack.config.babel.js",
+    "build:commonjs": "cross-env webpack --mode production --config ./webpack/webpack.config.babel.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -36,6 +36,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "babel-preset-vue": "^2.0.2",
     "cross-env": "^5.1.6",
+    "eslint-config-necfol": "^1.0.3",
     "webpack": "^4.9.1",
     "webpack-cli": "^2.1.4"
   },
