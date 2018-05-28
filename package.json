@@ -2,7 +2,7 @@
     "name": "vue-image-crop-preview",
     "version": "1.0.0",
     "description": "vue component for image cropping and previewing",
-    "main": "index.js",
+    "main": "lib/index.js",
     "scripts": {
         "build:commonjs":
             "cross-env webpack --mode production --config ./webpack/webpack.config.babel.js",
