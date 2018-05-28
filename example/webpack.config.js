@@ -1,4 +1,6 @@
 const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 function resolve(dir) {
     return path.join(__dirname, dir)
@@ -12,7 +14,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, './dist'),
         filename: '[name].js',
-        publicPath: '/dist/',
+        publicPath: '/',
     },
     resolve: {
         extensions: ['.js', '.vue', '.json'],
@@ -33,13 +35,20 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.css$/,
+                test: /(\.scss|\.css)$/,
                 use: [
-                    'vue-style-loader',
                     {
-                        loader: 'css-loader',
+                        loader: 'style-loader', // creates style nodes from JS strings
                     },
-                    'postcss-loader',
+                    {
+                        loader: 'css-loader', // translates CSS into CommonJS
+                    },
+                    {
+                        loader: 'postcss-loader', // translates CSS into CommonJS
+                    },
+                    {
+                        loader: 'sass-loader', // compiles Sass to CSS
+                    },
                 ],
             },
             {
@@ -77,5 +86,20 @@ module.exports = {
             },
         ],
     },
-    plugins: [new VueLoaderPlugin()],
+    plugins: [
+        new HtmlWebpackPlugin({ template: './index.html' }),
+        new webpack.NamedModulesPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        new VueLoaderPlugin(),
+    ],
+    devServer: {
+        // contentBase: './dist',
+        contentBase: path.resolve(__dirname, '/dist'),
+        publicPath: '/',
+        watchContentBase: true,
+        compress: true,
+        hot: true,
+        inline: true,
+        port: 8080,
+    },
 }
